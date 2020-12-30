@@ -1,0 +1,71 @@
+.cadre-genral{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  width: 90vw;
+  margin-left: -350px;
+}
+.bordure{
+  border: 3px solid black;
+  width: 235px;
+  height: 291px;
+}
+.comp{
+  top: 450px;
+}
+.icon
+{
+  margin-left: 120px;
+}
+.cadre2{
+  margin-left: 300px;
+  margin-top: -290px;
+}
+.cadre3{
+  margin-left: 600px;
+  margin-top: -290px;
+}
+
+.cadre4{
+  margin-left: 900px;
+  margin-top: -290px;
+}
+.cadre{
+  margin-left: 300px;
+  margin-top: -290px;
+}
+.cadre6{
+  margin-left: 300px;
+  margin-top: -290px;
+}
+.cadre7{
+  margin-left: 900px;
+  margin-top: -290px;
+}
+.cadre8{
+  margin-left: 600px;
+  margin-top: -290px;
+}
+.addicons{
+  margin-left: 1100px;
+}
+.add{
+  margin-left: 1100px;
+  margin-top: 25px;
+  position: absolute;
+}
+.height{
+  height: 150px;
+}
+
+@media screen and (max-device-width:640px), screen and (max-width:640px) {
+  .cadre-genral {
+
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+
+
+}
+}

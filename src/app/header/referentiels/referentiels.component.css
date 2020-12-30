@@ -1,0 +1,51 @@
+.referentile{
+  background-color: #cccccc;
+  width: 90%;
+  margin-left: -65px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.bordure{
+  border: 3px solid black;
+  width: 235px;
+  height: 491px;
+}
+.comp{
+  top: 450px;
+}
+.icon
+{
+  margin-left: 120px;
+}
+.d-block{
+  margin-left: 300px;
+  margin-top: -490px;
+}
+.lef-1{
+  margin-left: 600px;
+  margin-top: -490px;
+}
+
+.lef-2{
+  margin-left: 900px;
+  margin-top: -490px;
+}
+.lef-3{
+  margin-left: 300px;
+  margin-top: -490px;
+}
+.lef-4{
+  margin-left: 600px;
+  margin-top: -490px;
+}
+.lef-5{
+  margin-left: 900px;
+  margin-top: -490px;
+}
+.addicons{
+  margin-left: 1100px;
+}
+.add{
+  margin-left: 1100px;
+  margin-top: 25px;
+  position: absolute;
+}

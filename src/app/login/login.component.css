@@ -1,0 +1,35 @@
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.box{
+  background-color: black;
+  width: 450px;
+  height: 450px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.box h1 {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.box input[type="text"],.box input[type="password"]{
+  background: none;
+  display: block;
+  margin: 20px auto;
+  border: 1px solid #34998d;
+  padding: 19px 5px;
+  width: 370px;
+  outline: none;
+  margin-top: 15%;
+}
+.box button[type = "submit"]{
+  width: 100%;
+  margin-top: 5%;
+}
