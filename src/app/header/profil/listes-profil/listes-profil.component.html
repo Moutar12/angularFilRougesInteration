@@ -1,0 +1,44 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-lg-10 col-xl-10">
+
+      <app-add-profil></app-add-profil>
+
+      <table class="table table-bordered mt-5">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Libelle</th>
+          <th scope="col" class="text-xl-center">Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr  *ngFor="let p of profils | paginate: { itemsPerPage: 3, currentPage: l}">
+          <th scope="row">{{p.id}}</th>
+          <td>{{p.libelle}}</td>
+          <td class="text-xl-center">
+
+            <a  class="btn btn-primary" [routerLink]="['detail']" >Détail</a>
+
+            <a  class="btn btn-success ml-3" [routerLink]="['edit', p.id]">Editer</a>
+
+            <a class="btn btn-danger ml-3" (click)="onDeleted(p.id)">Supprimer</a>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="col">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+      <pagination-controls class="justify-content-center d-flex" (pageChange)="l = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+

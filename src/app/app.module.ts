@@ -11,8 +11,7 @@ import { ExplorerComponent } from './header/explorer/explorer.component';
 import { ForumComponent } from './header/forum/forum.component';
 import { HistoriqueDesPromosComponent } from './header/historique-des-promos/historique-des-promos.component';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {InterceptorToken} from './login-interceptor.interceptor';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { PromosComponent } from './header/promos/promos.component';
 import { ReferentielsComponent } from './header/referentiels/referentiels.component';
 import { GroupeDeCompetencesComponent } from './header/groupe-de-competences/groupe-de-competences.component';
@@ -20,7 +19,6 @@ import { CompetencesComponent } from './header/competences/competences.component
 import { GroupesTagsComponent } from './header/groupes-tags/groupes-tags.component';
 import { ProfilDeSortieComponent } from './header/profil-de-sortie/profil-de-sortie.component';
 import { ProfilComponent } from './header/profil/profil.component';
-import { EditeComponent } from './header/edite/edite.component';
 import { CreateReferentielComponent } from './header/referentiels/create-referentiel/create-referentiel.component';
 import { ListGroupeCompetenceComponent } from './header/groupe-de-competences/list-groupe-competence/list-groupe-competence.component';
 import { ItemGroupeCompetenceComponent } from './header/groupe-de-competences/list-groupe-competence/item-groupe-competence/item-groupe-competence.component';
@@ -33,6 +31,13 @@ import { UsersComponent } from './header/users/users.component';
 import { ListesUsersComponent } from './header/users/listes-users/listes-users.component';
 import { ItemUsersComponent } from './header/users/listes-users/item-users/item-users.component';
 import { AddUserComponent } from './header/users/add-user/add-user.component';
+import { ListesProfilComponent } from './header/profil/listes-profil/listes-profil.component';
+import { EditeProfilComponent } from './header/profil/edite-profil/edite-profil.component';
+import { DetailProfilComponent } from './header/profil/detail-profil/detail-profil.component';
+import {ServiceInterceptorInterceptor} from './service-interceptor.interceptor';
+import { AddProfilComponent } from './header/profil/add-profil/add-profil.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { DetailUsersComponent } from './header/users/detail-users/detail-users.component';
 
 
 @NgModule({
@@ -52,7 +57,6 @@ import { AddUserComponent } from './header/users/add-user/add-user.component';
     GroupesTagsComponent,
     ProfilDeSortieComponent,
     ProfilComponent,
-    EditeComponent,
     CreateReferentielComponent,
     ListGroupeCompetenceComponent,
     ItemGroupeCompetenceComponent,
@@ -65,18 +69,28 @@ import { AddUserComponent } from './header/users/add-user/add-user.component';
     ListesUsersComponent,
     ItemUsersComponent,
     AddUserComponent,
+    ListesProfilComponent,
+    EditeProfilComponent,
+    DetailProfilComponent,
+    AddProfilComponent,
+    DetailUsersComponent,
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        HttpClientModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    NgxPaginationModule
 
-    ],
+  ],
   providers: [
-    InterceptorToken
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServiceInterceptorInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

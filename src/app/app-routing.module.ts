@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {HeaderComponent} from './header/header.component';
 import {PromosComponent} from './header/promos/promos.component';
-import {EditeComponent} from './header/edite/edite.component';
 import {ProfilComponent} from './header/profil/profil.component';
 import {ProfilDeSortieComponent} from './header/profil-de-sortie/profil-de-sortie.component';
 import {GroupeDeCompetencesComponent} from './header/groupe-de-competences/groupe-de-competences.component';
@@ -12,6 +11,10 @@ import {ReferentielsComponent} from './header/referentiels/referentiels.componen
 import {CreateReferentielComponent} from './header/referentiels/create-referentiel/create-referentiel.component';
 import {CompetencesComponent} from './header/competences/competences.component';
 import {UsersComponent} from './header/users/users.component';
+import {DetailProfilComponent} from './header/profil/detail-profil/detail-profil.component';
+import {EditeProfilComponent} from './header/profil/edite-profil/edite-profil.component';
+import {DetailUsersComponent} from './header/users/detail-users/detail-users.component';
+import {AddUserComponent} from './header/users/add-user/add-user.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -23,16 +26,22 @@ const routes: Routes = [
           {path: 'reference', component: ReferentielsComponent, children: [
             {path: 'addREf', component: CreateReferentielComponent}
             ]},
-            {path: 'utili', component: UsersComponent},
+            {path: 'addUser', component: AddUserComponent},
+            {path: 'utili', component: UsersComponent, children: [
+                {path: 'detailusers/:id', component: DetailUsersComponent}
+              ]},
 
 
-          {path: 'grpcomp', component: GroupeDeCompetencesComponent, children: [
+              {path: 'grpcomp', component: GroupeDeCompetencesComponent, children: [
               {path: 'addgc', component: CreateGroupeCompetenceComponent},
             ]},
 
-          {path: ':edit', component: EditeComponent},
 
-      {path: 'profil', component: ProfilComponent},
+
+      {path: 'profil', component: ProfilComponent, children: [
+          {path: 'detail', component: DetailProfilComponent},
+          {path: 'edit/:id', component: EditeProfilComponent}
+        ]},
 
         ]},
 
