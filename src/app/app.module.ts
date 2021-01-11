@@ -38,6 +38,8 @@ import {ServiceInterceptorInterceptor} from './service-interceptor.interceptor';
 import { AddProfilComponent } from './header/profil/add-profil/add-profil.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { DetailUsersComponent } from './header/users/detail-users/detail-users.component';
+import { EditUsersComponent } from './header/users/edit-users/edit-users.component';
+import {CreateGroupeCompetenceComponent} from "./header/groupe-de-competences/create-groupe-competence/create-groupe-competence.component";
 
 
 @NgModule({
@@ -59,6 +61,7 @@ import { DetailUsersComponent } from './header/users/detail-users/detail-users.c
     ProfilComponent,
     CreateReferentielComponent,
     ListGroupeCompetenceComponent,
+    CreateGroupeCompetenceComponent,
     ItemGroupeCompetenceComponent,
     EditeGroupeCompetenceComponent,
     ListeReferentielsComponent,
@@ -74,6 +77,7 @@ import { DetailUsersComponent } from './header/users/detail-users/detail-users.c
     DetailProfilComponent,
     AddProfilComponent,
     DetailUsersComponent,
+    EditUsersComponent,
 
   ],
   imports: [

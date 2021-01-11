@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GroupeCompetenceService} from "../groupe-competence.service";
 
 @Component({
   selector: 'app-list-groupe-competence',
@@ -7,8 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListGroupeCompetenceComponent implements OnInit {
 tab = [1, 2, 3] ;
-  constructor() { }
+groupeCompetence: any = [];
+competence: any = [];
+  // @ts-ignore
+  p: number;
+  constructor(private servicesgrcp: GroupeCompetenceService) { }
  ngOnInit(): void {
+    this.servicesgrcp.getAllGrpcompetence().subscribe(
+      data => {
+        this.groupeCompetence = data;
+        this.competence = data;
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
 }

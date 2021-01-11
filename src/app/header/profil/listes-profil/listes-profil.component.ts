@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicesProfilService} from '../services-profil.service';
+import {element} from "protractor";
 
 @Component({
   selector: 'app-listes-profil',
@@ -12,17 +13,29 @@ export class ListesProfilComponent implements OnInit {
   // @ts-ignore
   // @ts-ignore
   l: number;
+  // @ts-ignore
+  isLoader: boolean;
   constructor(private services: ServicesProfilService) { }
 
   ngOnInit(): void {
-    console.log(this.profils) ;
+   this.listAllProfils();
+  }
+  // tslint:disable-next-line:typedef
+  listAllProfils(){
+    this.isLoader = false;
     this.services.getAllProfils().subscribe(
       data => {
         this.profils = data;
+        // tslint:disable-next-line:no-shadowed-variable
+        this.profils.forEach( (element: { [x: string]: boolean; }) => {
+          element.isEdit = false;
+        });
+        this.isLoader = false;
+      }, error => {
+        this.isLoader = false;
       }
     );
   }
-  // tslint:disable-next-line:typedef
 
   // tslint:disable-next-line:typedef
   onDeleted(id: number){

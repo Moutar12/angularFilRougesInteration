@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArrayName, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsersService} from "../users.service";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
-  selector: 'app-add-user',
-  templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  selector: 'app-edit-users',
+  templateUrl: './edit-users.component.html',
+  styleUrls: ['./edit-users.component.css']
 })
-export class AddUserComponent implements OnInit {
+export class EditUsersComponent implements OnInit {
 // @ts-ignore
   UsresForms: FormGroup;
   // @ts-ignore
@@ -19,12 +19,12 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.UsresForms = new FormGroup({
-     'prenom': new FormControl(null,
-       [
-         Validators.required,
-       Validators.maxLength(5),
-       Validators.minLength(10)
-     ]),
+      'prenom': new FormControl(null,
+        [
+          Validators.required,
+          Validators.maxLength(5),
+          Validators.minLength(10)
+        ]),
       'nom': new FormControl(null,[
         Validators.required,
         Validators.maxLength(5),
@@ -57,10 +57,10 @@ export class AddUserComponent implements OnInit {
       ]),
       'password': new FormControl(null,
         [
-        Validators.required,
-        Validators.maxLength(3),
-        Validators.minLength(6)
-      ]),
+          Validators.required,
+          Validators.maxLength(3),
+          Validators.minLength(6)
+        ]),
       // 'pwdcf': new FormControl(null, [
       //   Validators.required,
       //   Validators.maxLength(3),
@@ -80,7 +80,7 @@ export class AddUserComponent implements OnInit {
     // @ts-ignore
     //const control = new FormControl(null, Validators.required);
     // @ts-ignore
-   // (<FormArrayName>this.UsresForms.get('photo')).control;
+    // (<FormArrayName>this.UsresForms.get('photo')).control;
     // if (event.target.files.length > 0){
     //   const files = event.target.files[0];
     //   // @ts-ignore
@@ -100,7 +100,7 @@ export class AddUserComponent implements OnInit {
     formData.append('email', this.UsresForms.value.email);
     formData.append('type', this.UsresForms.value.type);
     formData.append('password', this.UsresForms.value.password);
-   // formData.append("avatar", this.UsresForms.get('avatar')?.value);
+    // formData.append("avatar", this.UsresForms.get('avatar')?.value);
 
     // this.users.postUsers(formData).subscribe(
     //   data => {
@@ -119,5 +119,6 @@ export class AddUserComponent implements OnInit {
     );
     console.log(this.UsresForms);
   }
+
 
 }

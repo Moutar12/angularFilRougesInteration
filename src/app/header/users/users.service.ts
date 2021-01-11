@@ -18,4 +18,9 @@ export class UsersService {
     return this.http.get(`http://127.0.0.1:8000/api/admin/users/${id}` );
   }
 
+  // postUsers(formData: any){
+  //   // @ts-ignore
+  //   return this.http.post('http://127.0.0.1:8000/api/admin/users');
+  // }
+
 }

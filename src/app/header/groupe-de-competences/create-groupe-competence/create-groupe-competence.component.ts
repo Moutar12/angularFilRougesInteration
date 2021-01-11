@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
+import {GroupeCompetenceService} from "../groupe-competence.service";
 
 @Component({
   selector: 'app-create-groupe-competence',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateGroupeCompetenceComponent implements OnInit {
 
-  constructor() { }
+  // @ts-ignore
+  groupeCptenceForm: FormGroup;
+  competence: any = {};
+
+  constructor(private Service: GroupeCompetenceService) { }
 
   ngOnInit(): void {
+    this.groupeCptenceForm = new FormGroup({
+      'libelle': new FormControl(null),
+      'description': new FormControl(null),
+      'competence': new FormControl([])
+    });
+
+  }
+
+  onSubmit(){
+    this.Service.addGroupeComp(this.competence).subscribe(
+      data => {
+        console.log(data);
+      }, error => {
+        console.log(error);
+      }
+    );
+    console.log(this.groupeCptenceForm);
   }
 
 }

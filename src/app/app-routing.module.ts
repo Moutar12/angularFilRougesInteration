@@ -15,6 +15,7 @@ import {DetailProfilComponent} from './header/profil/detail-profil/detail-profil
 import {EditeProfilComponent} from './header/profil/edite-profil/edite-profil.component';
 import {DetailUsersComponent} from './header/users/detail-users/detail-users.component';
 import {AddUserComponent} from './header/users/add-user/add-user.component';
+import {EditUsersComponent} from "./header/users/edit-users/edit-users.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -26,15 +27,17 @@ const routes: Routes = [
           {path: 'reference', component: ReferentielsComponent, children: [
             {path: 'addREf', component: CreateReferentielComponent}
             ]},
+            {path: 'editUsers/:id', component: EditUsersComponent},
             {path: 'addUser', component: AddUserComponent},
             {path: 'utili', component: UsersComponent, children: [
-                {path: 'detailusers/:id', component: DetailUsersComponent}
+                {path: 'detailusers/:id', component: DetailUsersComponent},
+
               ]},
 
 
-              {path: 'grpcomp', component: GroupeDeCompetencesComponent, children: [
+              {path: 'grpcomp', component: GroupeDeCompetencesComponent},
               {path: 'addgc', component: CreateGroupeCompetenceComponent},
-            ]},
+
 
 
 
