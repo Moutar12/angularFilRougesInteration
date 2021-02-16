@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UsersService} from "../users.service";
+import {UsersService} from "../../users.service";
 import {HttpClient} from "@angular/common/http";
+import {log} from "util";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-edit-users',
@@ -9,13 +11,16 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./edit-users.component.css']
 })
 export class EditUsersComponent implements OnInit {
+  // @ts-ignore
+  @Input() Users: users;
+
 // @ts-ignore
   UsresForms: FormGroup;
   // @ts-ignore
   Users: any = {};
   // @ts-ignore
   selectFile: File = null;
-  constructor(private users: UsersService, private http: HttpClient) { }
+  constructor(private users: UsersService, private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.UsresForms = new FormGroup({
@@ -89,6 +94,8 @@ export class EditUsersComponent implements OnInit {
     this.selectFile = <File>event.target.files[0];
   }
   onSubmit(){
+    const id = this.route.snapshot.params.id;
+
     const formData: any = new FormData();
     // @ts-ignore
     formData.append('photo', this.selectFile, this.selectFile.name);
@@ -100,23 +107,12 @@ export class EditUsersComponent implements OnInit {
     formData.append('email', this.UsresForms.value.email);
     formData.append('type', this.UsresForms.value.type);
     formData.append('password', this.UsresForms.value.password);
-    // formData.append("avatar", this.UsresForms.get('avatar')?.value);
-
-    // this.users.postUsers(formData).subscribe(
-    //   data => {
-    //     console.log(data);
-    //   }, error => {
-    //     console.log(error);
-    //   }
-    // );
     // @ts-ignore
-    this.http.post('http://127.0.0.1:8000/api/admin/users', formData).subscribe(
-      data => {
-        console.log(data);
-      }, error => {
-        console.log(error);
+    this.users.updateUsers(this.Users.id, id).subscribe(
+      () => {
+        console.log('modified');
       }
-    );
+    )
     console.log(this.UsresForms);
   }
 
