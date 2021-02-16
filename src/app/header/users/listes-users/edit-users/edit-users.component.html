@@ -6,42 +6,42 @@
         <div class="form-row mt-5">
           <div class="form-group col-sm-6">
             <label for="prenom">Prenom</label>
-            <input type="text" class="form-control" id="prenom"  placeholder="prénom" [formControlName]="'prenom'">
+            <input type="text" class="form-control" id="prenom"  placeholder="prénom" [formControlName]="'prenom'" [(ngModel)]="userid.prenom">
           </div>
           <div class="form-group col-sm-6">
             <label for="nom">Nom</label>
-            <input type="text" class="form-control" id="nom" placeholder="nom" [formControlName]="'nom'">
+            <input type="text" class="form-control" id="nom" placeholder="nom" [formControlName]="'nom'" [(ngModel)]="userid.nom" >
           </div>
 
           <div class="form-group col-sm-6">
             <label for="username">Usename</label>
-            <input type="text" class="form-control" id="username" placeholder="Username" [formControlName]="'username'">
+            <input type="text" class="form-control" id="username" placeholder="Username" [formControlName]="'username'" [(ngModel)]="userid.username">
           </div>
-
           <div  class="form-group col-sm-6">
             <label for="email">Adresse mail</label>
-            <input type="text" class="form-control" id="email" placeholder="Adresse mail" [formControlName]="'email'">
+            <input type="text" class="form-control" id="email" placeholder="Adresse mail" [formControlName]="'email'" [(ngModel)]="userid.email">
           </div>
 
           <div class="form-group col-sm-6">
             <label for="telephone">Telephone</label>
-            <input type="text" class="form-control" id="telephone" placeholder="Telephone" [formControlName]="'telephone'">
+            <input type="text" class="form-control" id="telephone" placeholder="Telephone" [formControlName]="'telephone'" [(ngModel)]="userid.telephone">
           </div>
 
           <div class="form-group col-sm-6">
             <label for="type">Type</label>
-            <input type="text" class="form-control" id="type" placeholder="Telephone" [formControlName]="'type'">
+            <input type="text" class="form-control" id="type" placeholder="Type" [formControlName]="'type'" [(ngModel)]="userid.type">
           </div>
 
-          <div  class="form-group col-sm-6">
+          <div class="form-group col-sm-6">
             <label for="adresse">Adresse</label>
-            <input type="text" class="form-control" id="adresse" placeholder="Adresse mail" [formControlName]="'adresse'">
+            <input type="text" class="form-control" id="adresse" placeholder="Adresse mail" [formControlName]="'adresse'" >
           </div>
 
           <div class="form-group col-sm-6">
             <label for="password">password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" [formControlName]="'password'" [(ngModel)]="this.Users.password">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" [formControlName]="'password'">
           </div>
+
           <div class="form-group col-sm-6">
             <label for="profil">Profil</label>
             <select class="form-control" id="profil" [formControlName]="'profil'">
@@ -54,6 +54,9 @@
           <div class="form-group">
             <label for="file">Avatar</label>
             <input type="file" class="form-control" id="file" name="photo" (change)="UploadFile($event)" [formControlName]="'photo'">
+            <div class="form-group col-sm-6">
+              <img [src]="imgsrc" alt="" style="height: 50px; width: 50px; border-radius: 50px">
+            </div>
           </div>
           <button type="submit" class="btn btn-primary w-100">Soumettre</button>
         </div>

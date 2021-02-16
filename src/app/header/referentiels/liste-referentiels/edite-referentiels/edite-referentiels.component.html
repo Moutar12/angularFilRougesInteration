@@ -1,0 +1,58 @@
+<div class="container shadow-lg p-3 mb-5 bg-white rounded mt-5">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-sm-12">
+      <form [formGroup]="referentiel" >
+
+        <div class="form-row mt-5">
+          <div class="form-group col-sm-6">
+            <label class="control-label ">Libelle:</label>
+            <input type="text" class="form-control" [formControlName]="'libelle'"  placeholder="Développer le back-end d’une application web">
+
+          </div>
+
+
+          <div class="form-group col-sm-6">
+            <label class="control-label ">Presentation:</label>
+            <input type="text" class="form-control" [formControlName]="'presentation'"  placeholder="Presentation">
+
+          </div>
+
+
+          <div class="form-group  ml-5">
+            <label class="control-label">Programme:</label>
+            <input type="file" class="form-control" [formControlName]="'programme'"  placeholder="Développer le back-end d’une application web">
+          </div>
+
+          <div class="form-group col-sm-6 ml-5">
+            <label class="control-label ">Critères d'évaluation:</label>
+            <select class="form-control " name="critereEvaluation" [formControlName]="'critereEvaluation'" >
+              <option >Un portfolio comprenant la réalisation d'au moins 9 </option>
+              <option>Une soutenance devant un jury de professionnels</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="control-label ">Critères d'admission:</label>
+            <select class="form-control" name="critereAdmission" [formControlName]="'critereAdmission'" >
+              <option>Un portfolio comprenant la réalisation d'au moins 9</option>
+              <option>Une soutenance devant un jury de professionnels</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="control-label">Groupe de compétences:</label>
+            <ng-multiselect-dropdown
+              [placeholder]="'competence'"
+              [data]="dropdownList"
+              [settings]="dropdownSettings"
+              [formControlName]="'groupeCompetence'"
+            >
+            </ng-multiselect-dropdown>
+          </div>
+          <button type="submit" class="btn btn-primary float-md-right text-center w-50">Soumettre</button>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+

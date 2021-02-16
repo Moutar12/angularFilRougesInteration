@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormArrayName, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsersService} from "../users.service";
 import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {MustMatch} from "./MustMatch";
 
 @Component({
   selector: 'app-add-user',
@@ -14,10 +16,18 @@ export class AddUserComponent implements OnInit {
   // @ts-ignore
   Users: any = {};
   // @ts-ignore
-  selectFile: File = null;
-  constructor(private users: UsersService, private http: HttpClient) { }
+  selectFile: any = null;
+  imgsrc: string = '/assets/img';
+  showMsg: boolean = false;
+
+  constructor(private users: UsersService, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     this.UsresForms = new FormGroup({
      'prenom': new FormControl(null,
        [
@@ -61,37 +71,32 @@ export class AddUserComponent implements OnInit {
         Validators.maxLength(3),
         Validators.minLength(6)
       ]),
-      // 'pwdcf': new FormControl(null, [
-      //   Validators.required,
-      //   Validators.maxLength(3),
-      //   Validators.maxLength(6)
-      // ]),
+      'pwdcf': new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(3),
+        Validators.maxLength(6)
+      ]),
       'profil': new FormControl(null),
-      'photo': new FormControl([]),
+     'photo': new FormControl(null),
     });
   }
   // @ts-ignore
-  UploadFile(event){
-    // @ts-ignore
-    // const file = (event.target as HTMLInputElement).files[0];
-    // this.UsresForms.patchValue({
-    //   avatar: file
-    // });
-    // @ts-ignore
-    //const control = new FormControl(null, Validators.required);
-    // @ts-ignore
-   // (<FormArrayName>this.UsresForms.get('photo')).control;
-    // if (event.target.files.length > 0){
-    //   const files = event.target.files[0];
-    //   // @ts-ignore
-    //   this.UsresForms.get('file').setValue(files)
-    // }
-    this.selectFile = <File>event.target.files[0];
+  UploadFile(event: any){
+    if (event.target.files && event.target.files[0]){
+      const reader = new FileReader();
+      reader.onload = (e:any) => this.imgsrc = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectFile = event.target.files[0];
+    }else
+    {
+      this.imgsrc = '/assets/img';
+      this.selectFile = null;
+    }
   }
   onSubmit(){
-    const formData: any = new FormData();
-    // @ts-ignore
-    formData.append('photo', this.selectFile, this.selectFile.name);
+     const formData: any = new FormData();
+   //  // @ts-ignore
+   formData.append('photo', this.selectFile, this.selectFile.name);
     formData.append('username', this.UsresForms.value.username);
     formData.append('prenom', this.UsresForms.value.prenom);
     formData.append('nom', this.UsresForms.value.nom);
@@ -100,24 +105,16 @@ export class AddUserComponent implements OnInit {
     formData.append('email', this.UsresForms.value.email);
     formData.append('type', this.UsresForms.value.type);
     formData.append('password', this.UsresForms.value.password);
-   // formData.append("avatar", this.UsresForms.get('avatar')?.value);
+   //formData.append("avatar", this.UsresForms.get('avatar')?.value);
 
-    // this.users.postUsers(formData).subscribe(
-    //   data => {
-    //     console.log(data);
-    //   }, error => {
-    //     console.log(error);
-    //   }
-    // );
-    // @ts-ignore
-    this.http.post('http://127.0.0.1:8000/api/admin/users', formData).subscribe(
-      data => {
-        console.log(data);
-      }, error => {
-        console.log(error);
-      }
-    );
-    console.log(this.UsresForms);
+   // @ts-ignore
+    this.users.postUsers(formData, this.UsresForms.value).subscribe(
+     data => {
+       this.showMsg = true;
+       this.UsresForms.reset({});
+       this.router.navigate(['/head/utili'])
+     }
+   )
   }
 
 }

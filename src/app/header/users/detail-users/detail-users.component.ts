@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from '../users.service';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Data} from "@angular/router";
 
 @Component({
   selector: 'app-detail-users',
@@ -10,21 +10,23 @@ import {ActivatedRoute} from "@angular/router";
 export class DetailUsersComponent implements OnInit {
 
   constructor(private UsersServices: UsersService, private route: ActivatedRoute) { }
-  Users: any = {};
+  Users: any = [];
   ngOnInit(): void {
-    // @ts-ignore
-    this.getUsersId();
-  }
-  // tslint:disable-next-line:typedef
-  getUsersId(){
-    const id = +this.route.snapshot.params.id;
-    console.log(id);
-    this.UsersServices.getDetail(id).subscribe(
-      data => {
-        this.Users = data;
-        console.log(this.Users);
-        console.log(data);
+    this.route.data.subscribe(
+      (data: Data) => {
+        this.Users = data['Users']
       }
     );
+    // @ts-ignore
+    // const id = +this.route.snapshot.params.id;
+    // console.log(id);
+    // this.UsersServices.getDetail(id).subscribe(
+    //   data => {
+    //     this.Users = data;
+    //     console.log(this.Users);
+    //     console.log(data);
+    //   }
+    // );
   }
+
 }

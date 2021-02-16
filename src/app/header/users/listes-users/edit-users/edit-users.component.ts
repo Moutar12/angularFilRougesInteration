@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsersService} from "../../users.service";
-import {HttpClient} from "@angular/common/http";
-import {log} from "util";
-import {ActivatedRoute} from "@angular/router";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-users',
@@ -12,15 +11,20 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class EditUsersComponent implements OnInit {
   // @ts-ignore
-  @Input() Users: users;
-
+  @Input() users: users;
+  // @ts-ignore
+  id: number;
 // @ts-ignore
   UsresForms: FormGroup;
   // @ts-ignore
   Users: any = {};
   // @ts-ignore
-  selectFile: File = null;
-  constructor(private users: UsersService, private http: HttpClient, private route: ActivatedRoute) { }
+  userid: any = [];
+  // @ts-ignore
+
+  imgsrc: string = '/assets/img';
+  selectFile: any = null;
+  constructor(private user: UsersService, private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.UsresForms = new FormGroup({
@@ -74,27 +78,33 @@ export class EditUsersComponent implements OnInit {
       'profil': new FormControl(null),
       'photo': new FormControl([]),
     });
+    this.id = this.route.snapshot.params.id;
+    //console.log(this.id);
+    this.user.getDetail(this.id).subscribe(
+      data => {
+        // @ts-ignore
+        this.userid =data;
+        console.log(this.userid);
+      }
+    )
+
   }
   // @ts-ignore
-  UploadFile(event){
-    // @ts-ignore
-    // const file = (event.target as HTMLInputElement).files[0];
-    // this.UsresForms.patchValue({
-    //   avatar: file
-    // });
-    // @ts-ignore
-    //const control = new FormControl(null, Validators.required);
-    // @ts-ignore
-    // (<FormArrayName>this.UsresForms.get('photo')).control;
-    // if (event.target.files.length > 0){
-    //   const files = event.target.files[0];
-    //   // @ts-ignore
-    //   this.UsresForms.get('file').setValue(files)
-    // }
-    this.selectFile = <File>event.target.files[0];
+  UploadFile(event: any){
+    if (event.target.files && event.target.files[0]){
+      const reader = new FileReader();
+      reader.onload = (e:any) => this.imgsrc = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectFile = event.target.files[0];
+    }else
+    {
+      this.imgsrc = '/assets/img';
+      this.selectFile = null;
+    }
   }
+
   onSubmit(){
-    const id = this.route.snapshot.params.id;
+    const formValue = this.UsresForms.value;
 
     const formData: any = new FormData();
     // @ts-ignore
@@ -108,9 +118,10 @@ export class EditUsersComponent implements OnInit {
     formData.append('type', this.UsresForms.value.type);
     formData.append('password', this.UsresForms.value.password);
     // @ts-ignore
-    this.users.updateUsers(this.Users.id, id).subscribe(
-      () => {
-        console.log('modified');
+    this.user.updateUsers(this.id,formData, formValue,{headers: new HttpHeaders, responseType: 'blob'}).subscribe(
+      data => {
+        this.router.navigate(['/head/utili'])
+
       }
     )
     console.log(this.UsresForms);

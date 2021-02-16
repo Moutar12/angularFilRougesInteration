@@ -21,14 +21,21 @@ export class ServicesProfilService {
   }
   // tslint:disable-next-line:typedef
   getAllProfils(){
-    return this.http.get(' http://127.0.0.1:8000/api/admin/profils');
+    return this.http.get(' http://127.0.0.1:8000/api/admin/profils?archive=1');
+  }
+  detailProfil(id: number){
+    return this.http.get(`${this.url}/admin/profils/${id}/users`)
   }
 
   // tslint:disable-next-line:typedef
-  modifiProfil(libelle: string, id: number){
+  modifiProfil(id: number, libelle: any){
     // @ts-ignore
-    return this.http.put( `${this.url}/admin/profils/` + id, {libelle});
+    return this.http.put( `http://127.0.0.1:8000/api/admin/profils/${id}`, libelle);
 
+  }
+
+  profilDetail(id: number){
+    return this.http.get(`${this.url}/admin/profils/` + id)
   }
 
   // tslint:disable-next-line:typedef

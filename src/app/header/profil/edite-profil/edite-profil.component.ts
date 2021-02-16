@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicesProfilService} from '../services-profil.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-edite-profil',
@@ -14,24 +14,38 @@ export class EditeProfilComponent implements OnInit {
   // @ts-ignore
   id: number;
   // @ts-ignore
-  libelle: string;
-  constructor(private services: ServicesProfilService, private formBuilder: FormBuilder, private route: ActivatedRoute) { }
+ // libelle: string;
+  profil: any = [];
+  showMsg: boolean = false;
+
+  constructor(private services: ServicesProfilService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.params.id;
-    this.Form = this.formBuilder.group(
+    this.Form = new FormGroup(
       {
-        libelle: ['', Validators.required]
+        'libelle': new FormControl(null)
       }
     );
+    this.id = this.route.snapshot.params.id;
+    this.services.profilDetail(this.id).subscribe(
+      data => {
+        // @ts-ignore
+        this.profil =data;
+        console.log(this.profil);
+      }
+    )
   }
   // tslint:disable-next-line:typedef
   editProfil(){
+    const formvalue = this.Form.value
     // @ts-ignore
-    const id = +this.route.snapshot.params.id;
-    this.services.modifiProfil(this.libelle, id).subscribe(
+    this.id = +this.route.snapshot.params.id;
+    // @ts-ignore
+    this.services.modifiProfil(this.id, formvalue).subscribe(
         data => {
-          console.log(data);
+          this.showMsg = true;
+          this.Form.reset({});
+          this.router.navigate(['/head/profil'])
       }
     );
   }

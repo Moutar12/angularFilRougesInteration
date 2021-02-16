@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {ServicesProfilService} from '../services-profil.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-profil',
@@ -13,7 +14,8 @@ export class AddProfilComponent implements OnInit {
   // @ts-ignore
   libelle: string;
   profil: any = {};
-  constructor(private formBuilder: FormBuilder, private serviceProfil: ServicesProfilService) { }
+  showMsg: boolean = false;
+  constructor(private formBuilder: FormBuilder, private serviceProfil: ServicesProfilService,private router: Router) { }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group(
@@ -26,9 +28,19 @@ export class AddProfilComponent implements OnInit {
   ajoutProfil() {
     this.serviceProfil.addProfil(this.profil).subscribe(
       data => {
+
+        // @ts-ignore
+        this.showMsg = true;
+        this.formGroup.reset({});
+        window.location.reload();
+
         console.log(data);
       }
     );
+
+
+
+
   }
 
 }

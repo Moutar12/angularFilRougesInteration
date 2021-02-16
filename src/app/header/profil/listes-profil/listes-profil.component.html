@@ -19,9 +19,9 @@
           <td>{{p.libelle}}</td>
           <td class="text-xl-center">
 
-            <a  class="btn btn-primary" [routerLink]="['detail']" >Détail</a>
+            <a  class="btn btn-primary" [routerLink]="['/head/detail', p.id]" >Détail</a>
 
-            <a  class="btn btn-success ml-3" [routerLink]="['edit', p.id]">Editer</a>
+            <a  class="btn btn-success ml-3" [routerLink]="['/head/edit', p.id]">Editer</a>
 
             <a class="btn btn-danger ml-3" (click)="onDeleted(p.id)">Supprimer</a>
 

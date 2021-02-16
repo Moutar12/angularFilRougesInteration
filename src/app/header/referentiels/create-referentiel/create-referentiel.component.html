@@ -1,62 +1,58 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-10">
-      <form class="form-container">
-        <div class="box">
+<div class="container shadow-lg p-3 mb-5 bg-white rounded mt-5">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-sm-12">
+      <form [formGroup]="referentiel" (ngSubmit)="ajoutReferentiel()">
 
-    <div class="form-group">
-      <label class="control-label col-sm-4">Libelle:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control"  placeholder="Développer le back-end d’une application web">
-      </div>
+    <div class="form-row mt-5">
+      <div class="form-group col-sm-6">
+      <label class="control-label ">Libelle:</label>
+        <input type="text" class="form-control" [formControlName]="'libelle'"  placeholder="Développer le back-end d’une application web">
+
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-4">Description:</label>
-      <div class="col-sm-10">
-        <textarea rows="4" class="form-control" placeholder="Donner le descriptif"></textarea>
+
+
+      <div class="form-group col-sm-6">
+        <label class="control-label ">Presentation:</label>
+        <input type="text" class="form-control" [formControlName]="'presentation'"  placeholder="Presentation">
+
       </div>
+
+
+    <div class="form-group  ml-5">
+      <label class="control-label">Programme:</label>
+        <input type="file" class="form-control" [formControlName]="'programme'"  placeholder="Développer le back-end d’une application web">
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-4">Compétences:</label>
-      <div class="col-sm-4">
-        <select class="form-control" >
-          <option value="">Créer une base de données</option>
-          <option value="">Développer les composants d’accès aux données</option>
+
+    <div class="form-group col-sm-6 ml-5">
+      <label class="control-label ">Critères d'évaluation:</label>
+        <select class="form-control " name="critereEvaluation" [formControlName]="'critereEvaluation'" >
+          <option >Un portfolio comprenant la réalisation d'au moins 9 </option>
+          <option>Une soutenance devant un jury de professionnels</option>
         </select>
-      </div>
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-4">Programme:</label>
-      <div class="col-sm-10">
-        <input type="file" class="form-control"  placeholder="Développer le back-end d’une application web">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-4">Critères d'évaluation:</label>
-      <div class="col-sm-4">
-        <select class="form-control" >
-          <option value="">Un portfolio comprenant la réalisation d'au moins 9 </option>
-          <option value="">Une soutenance devant un jury de professionnels</option>
+    <div class="form-group col-sm-6">
+      <label class="control-label ">Critères d'admission:</label>
+        <select class="form-control" name="critereAdmission" [formControlName]="'critereAdmission'" >
+          <option>Un portfolio comprenant la réalisation d'au moins 9</option>
+          <option>Une soutenance devant un jury de professionnels</option>
         </select>
+    </div>
+      <div class="form-group col-sm-6">
+        <label class="control-label">Groupe de compétences:</label>
+        <ng-multiselect-dropdown
+          [placeholder]="'competence'"
+          [data]="dropdownList"
+          [settings]="dropdownSettings"
+          [formControlName]="'groupeCompetence'"
+        >
+        </ng-multiselect-dropdown>
       </div>
+        <button type="submit" class="btn btn-primary float-md-right text-center w-50">Soumettre</button>
+
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-4">Critères d'admission:</label>
-      <div class="col-sm-4">
-        <select class="form-control" >
-          <option value="">Un portfolio comprenant la réalisation d'au moins 9</option>
-          <option value="">Une soutenance devant un jury de professionnels</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary">Soumettre</button>
-      </div>
-    </div>
-    </div>
+
       </form>
     </div>
+  </div>
+</div>
 
-</div>
-</div>

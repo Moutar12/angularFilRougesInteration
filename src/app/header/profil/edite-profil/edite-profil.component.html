@@ -2,11 +2,14 @@
 
   <div class="row">
     <div class="col-12 col-sm-10 col-lg-10 col-xl-10">
-      <form class="container-fluid" (ngSubmit)="editProfil()" [formGroup]="Form">
+      <div *ngIf="showMsg" class="alert alert-success">
+        <strong>Modifier avecsucess</strong>
+      </div>
+      <form class="container-fluid" [formGroup]="Form" (ngSubmit)="editProfil()" >
 
         <div class="form-group">
-          <label>Add Profil</label>
-          <input type="text" class="form-control" formControlName="libelle" [(ngModel)]="libelle" placeholder="Ajouter profil">
+          <label>Modifier Profil</label>
+          <input type="text" class="form-control" [formControlName]="'libelle'" [(ngModel)]="profil.libelle" placeholder="Modifier profil">
         </div>
         <div class="d-flex flex-column-reverse bd-highlight mb-3">
           <button type="submit" class="btn btn-primary">Submit</button>

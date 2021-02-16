@@ -1,15 +1,27 @@
-<app-item-users></app-item-users>
-<div class="container-fluid">
-<div class="row">
-  <div class="col-sm-5 ">
-    <svg xmlns="http://www.w3.org/2000/svg" [routerLink]="['/head/addUser']" width="30" height="30"   fill="currentColor" class="bi bi-person-plus-fill justify-content-lg-between"  viewBox="0 0 16 16">
-      <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-      <path fill-rule="evenodd"  d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-    </svg>
+
+<div class="container mt-5">
+  <div class="form-group">
+    <label for="search-text">Search Text</label>
+    <input type="email" class="form-control" id="search-text" aria-describedby="search-text"
+           [(ngModel)]="searchText" placeholder="Enter text to search"
+           autofocus>
+  </div>
+<div class="row justify-content-center">
+  <div class="col-12 col-sm-10 col-lg-10 col-xl-10">
+    <div class="row float-right ">
+      <div class="col-10 col-sm-3 col-lg-3  col-md-3" style="margin-left: -50px;">
+        <i class="fas fa-user " [routerLink]="['/head/addUser']" width="30" height="30"></i>
+      </div>
+    </div>
 
 
+<div>
+  <button class="btn btn-primary" [routerLink]="['/head/userArchive']">Users archive</button>
+</div>
 
-<table class="table table-bordered table-sm table-responsive-sm mt-5 p-5 ml-5" style="width: 100%">
+
+<table class="table table-bordered mt-5 table-responsive-sm ">
+
   <thead class="thead-dark ">
   <tr>
     <th scope="col">ID</th>
@@ -18,34 +30,38 @@
     <th scope="col">Prénom</th>
     <th scope="col">Mail</th>
     <th scope="col">Profil</th>
-    <th scope="col" class="text-center">Actions</th>
+    <th scope="col" class="text-center ">Actions</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let user of users | paginate: { itemsPerPage: 3, currentPage: p }">
+  <tr *ngFor="let user of users | paginate: { itemsPerPage: 3, currentPage: p } |  filter: searchText">
     <th scope="row">{{user.id}}</th>
+<!--    <p>{{user.photo}}</p>-->
     <td>
-      <img style="height: 50px; width: 50px" src="data:image/jpeg;base64,{{user.photo}}" alt="">
+      <span *ngIf="user.photo !== 'aW1hZ2U=' && user.photo != null">
+        <img style="height: 50px; width: 50px" src="data:image/jpeg;base64,{{user.photo}}"  alt="">
+      </span>
+      <span *ngIf="!user.photo || user.photo == 'aW1hZ2U='">
+        <img style="height: 50px; width: 50px" src="https://source.unsplash.com/1080x720/?users"  alt="">
+      </span>
     </td>
-    <td>{{user.nom}}</td>
-    <td>{{user.prenom}}</td>
+    <td>{{user.nom | titlecase}}</td>
+    <td>{{user.prenom | titlecase}}</td>
     <td>{{user.email}}</td>
     <td>{{user.profil.libelle}}</td>
-    <td class="text-center">
-      <a class="btn btn-outline-primary" [routerLink]="['detailusers',user.id]">Détail</a>
+    <td class="text-xl-center col-12">
+      <a class="btn btn-outline-primary" [routerLink]="['/head/utili/detailusers',  user.id]">Détail</a>
       <a class="btn btn-outline-success ml-3" [routerLink]="['/head/editUsers', user.id]">Editer</a>
-      <a class="btn btn-outline-danger ml-3">Supprimer</a>
+      <a class="btn btn-outline-danger ml-3" (click)="deleteUsers(user.id)">Supprimer</a>
     </td>
   </tr>
   </tbody>
 </table>
+    <router-outlet></router-outlet>
     <pagination-controls class="justify-content-center d-flex" (pageChange)="p = $event"></pagination-controls>
 </div>
-  <div class="col">
-    <router-outlet></router-outlet>
-  </div>
-
 </div>
 
 </div>
+
 

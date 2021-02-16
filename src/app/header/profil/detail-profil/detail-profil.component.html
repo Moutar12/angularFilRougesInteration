@@ -1,1 +1,31 @@
-<p>detail-profil works!</p>
+<div class="container mt-5">
+  <div class="d-flex row justify-content-center offset-3">
+    <div class="col-sm-12 ">
+
+    <div class="card" style="width: 35rem;">
+
+    <li class="list-group-item bg-primary">{{profil.libelle}}</li>
+    <div>
+      <table class="table table-bordered mt-5">
+        <thead>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Prenom</th>
+
+
+        </tr>
+        </thead>
+      <tbody>
+      <tr  *ngFor="let p of profil.users">
+        <td>{{p.nom}}</td>
+        <td>{{p.prenom}}</td>
+      </tr>
+      </tbody>
+      </table>
+
+    </div>
+
+</div>
+    </div>
+    </div>
+    </div>

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {GroupeCompetenceService} from "../groupe-competence.service";
-import {CompetenceService} from "../../competences/competence.service";
+import {GroupeCompetenceService} from "../../groupe-competence.service";
+import {CompetenceService} from "../../../competences/competence.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({

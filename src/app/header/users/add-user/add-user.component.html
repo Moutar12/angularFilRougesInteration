@@ -1,7 +1,9 @@
 <div class="container shadow-lg p-3 mb-5 bg-white rounded">
 <div class="row d-flex justify-content-center">
   <div class="col-sm-12">
-    <h3 class="text-center text-capitalize text-primary">Bienvenue sur la d'ajout des utilisateur</h3>
+    <div *ngIf="showMsg" class="alert alert-success">
+      <strong>sucess</strong>
+    </div>
     <form [formGroup]="UsresForms" (ngSubmit)="onSubmit()">
       <div class="form-row mt-5">
       <div class="form-group col-sm-6">
@@ -30,7 +32,7 @@
 
         <div class="form-group col-sm-6">
           <label for="type">Type</label>
-          <input type="text" class="form-control" id="type" placeholder="Telephone" [formControlName]="'type'">
+          <input type="text" class="form-control" id="type" placeholder="Type" [formControlName]="'type'">
         </div>
 
         <div  class="form-group col-sm-6">
@@ -42,6 +44,7 @@
           <label for="password">password</label>
           <input type="password" class="form-control" id="password" name="password" placeholder="Password" [formControlName]="'password'" [(ngModel)]="this.Users.password">
         </div>
+
       <div class="form-group col-sm-6">
         <label for="profil">Profil</label>
         <select class="form-control" id="profil" [formControlName]="'profil'">
@@ -51,10 +54,19 @@
           <option>APPRENANT</option>
         </select>
       </div>
-      <div class="form-group">
+
+        <div class="form-group col-sm-6">
+          <label for="password">Confirmer password</label>
+          <input type="password" class="form-control" id="pwdcf" name="password" placeholder="Password" [formControlName]="'pwdcf'" [(ngModel)]="this.Users.password">
+        </div>
+
+      <div class="form-group col-sm-6">
         <label for="file">Avatar</label>
-        <input type="file" class="form-control" id="file" name="photo" (change)="UploadFile($event)" [formControlName]="'photo'">
+        <input type="file" class="form-control" id="file" (change)="UploadFile($event)" [formControlName]="'photo'">
       </div>
+        <div class="form-group col-sm-6">
+          <img [src]="imgsrc" alt="" style="height: 50px; width: 50px; border-radius: 50px">
+        </div>
       <button type="submit" class="btn btn-primary w-100">Soumettre</button>
       </div>
     </form>

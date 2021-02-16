@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,15 +22,13 @@ import { ProfilDeSortieComponent } from './header/profil-de-sortie/profil-de-sor
 import { ProfilComponent } from './header/profil/profil.component';
 import { CreateReferentielComponent } from './header/referentiels/create-referentiel/create-referentiel.component';
 import { ListGroupeCompetenceComponent } from './header/groupe-de-competences/list-groupe-competence/list-groupe-competence.component';
-import { ItemGroupeCompetenceComponent } from './header/groupe-de-competences/list-groupe-competence/item-groupe-competence/item-groupe-competence.component';
-import { EditeGroupeCompetenceComponent } from './header/groupe-de-competences/edite-groupe-competence/edite-groupe-competence.component';
+import { EditeGroupeCompetenceComponent } from './header/groupe-de-competences/list-groupe-competence/edite-groupe-competence/edite-groupe-competence.component';
 import { ListeReferentielsComponent } from './header/referentiels/liste-referentiels/liste-referentiels.component';
 import { ItemReferentilComponent } from './header/referentiels/liste-referentiels/item-referentil/item-referentil.component';
 import { ListeCompetenceComponent } from './header/competences/liste-competence/liste-competence.component';
-import { ItemCompetenceComponent } from './header/competences/liste-competence/item-competence/item-competence.component';
 import { UsersComponent } from './header/users/users.component';
 import { ListesUsersComponent } from './header/users/listes-users/listes-users.component';
-import { ItemUsersComponent } from './header/users/listes-users/item-users/item-users.component';
+import { ItemUsersComponent } from './header/users/add-user/item-users/item-users.component';
 import { AddUserComponent } from './header/users/add-user/add-user.component';
 import { ListesProfilComponent } from './header/profil/listes-profil/listes-profil.component';
 import { EditeProfilComponent } from './header/profil/edite-profil/edite-profil.component';
@@ -38,8 +37,18 @@ import {ServiceInterceptorInterceptor} from './service-interceptor.interceptor';
 import { AddProfilComponent } from './header/profil/add-profil/add-profil.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { DetailUsersComponent } from './header/users/detail-users/detail-users.component';
-import { EditUsersComponent } from './header/users/edit-users/edit-users.component';
+import { EditUsersComponent } from './header/users/listes-users/edit-users/edit-users.component';
 import {CreateGroupeCompetenceComponent} from "./header/groupe-de-competences/create-groupe-competence/create-groupe-competence.component";
+import { ItemGroupeCompetenceComponent } from './header/groupe-de-competences/list-groupe-competence/item-groupe-competence/item-groupe-competence.component';
+import { EditeReferentielsComponent } from './header/referentiels/liste-referentiels/edite-referentiels/edite-referentiels.component';
+import {LoginGuard} from "./guard/login.guard";
+import { FiltrePipePipe } from './filtre-pipe.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ServiceDetailPromisePipe } from './service-detail-promise.pipe';
+import { ItemCompetenceComponent } from './header/competences/liste-competence/item-competence/item-competence.component';
+import { AddCompetenceComponent } from './header/competences/add-competence/add-competence.component';
+import { EditCompetenceComponent } from './header/competences/edit-competence/edit-competence.component';
+
 
 
 @NgModule({
@@ -62,12 +71,10 @@ import {CreateGroupeCompetenceComponent} from "./header/groupe-de-competences/cr
     CreateReferentielComponent,
     ListGroupeCompetenceComponent,
     CreateGroupeCompetenceComponent,
-    ItemGroupeCompetenceComponent,
     EditeGroupeCompetenceComponent,
     ListeReferentielsComponent,
     ItemReferentilComponent,
     ListeCompetenceComponent,
-    ItemCompetenceComponent,
     UsersComponent,
     ListesUsersComponent,
     ItemUsersComponent,
@@ -78,6 +85,13 @@ import {CreateGroupeCompetenceComponent} from "./header/groupe-de-competences/cr
     AddProfilComponent,
     DetailUsersComponent,
     EditUsersComponent,
+    ItemGroupeCompetenceComponent,
+    EditeReferentielsComponent,
+    FiltrePipePipe,
+    ServiceDetailPromisePipe,
+    ItemCompetenceComponent,
+    AddCompetenceComponent,
+    EditCompetenceComponent,
 
   ],
   imports: [
@@ -86,15 +100,19 @@ import {CreateGroupeCompetenceComponent} from "./header/groupe-de-competences/cr
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgMultiSelectDropDownModule,
+    Ng2SearchPipeModule
+
 
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ServiceInterceptorInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
+    LoginGuard
   ],
   bootstrap: [AppComponent]
 })

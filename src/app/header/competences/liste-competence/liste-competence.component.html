@@ -1,12 +1,66 @@
-<div class="mt-5">
-  <div class="form-group col-sm-5 border">
-    <select class="form-control" id="profil" [formControlName]="'profil'">
-      <option>ADMIN</option>
-      <option>FORMATEUR</option>
-      <option>CM</option>
-      <option>APPRENANT</option>
-    </select>
+
+
+
+<!--<div class="container">-->
+<!--  <div class="row mt-5" >-->
+<!--    <div class="col-sm-6 div1" >-->
+<!--      <div class="form-group col-sm-12" >-->
+<!--        <select class="form-control" >-->
+<!--          <option *ngFor="let compet of competence">{{compet.libelle}}</option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col" >-->
+<!--      <p >-->
+<!--        <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Niveau 1</a>-->
+<!--        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Niveau 2</button>-->
+<!--        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample2">Niveau 3</button>-->
+<!--      </p>-->
+
+
+<!--      <div class="col-sm-7">-->
+<!--        <div class="collapse multi-collapse" id="multiCollapseExample1">-->
+<!--          <div class="card card-body"  *ngFor="let compet of competence.niveau">-->
+<!--            {{compet.libelle}}-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-sm-7">-->
+<!--        <div class="collapse multi-collapse" id="multiCollapseExample2">-->
+<!--          <div class="card card-body">-->
+<!--            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-sm-7">-->
+<!--        <div class="collapse " id="multiCollapseExample3">-->
+<!--          <div class="card card-body">-->
+<!--            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->
+
+
+
+
+<div class="container">
+
+  <div class="row float-right mt-3">
+    <div class="col-10 col-sm-3 col-lg-3  col-md-3" style="margin-left: -150px;">
+      <i class="fas fa-user " [routerLink]="['/head/addcompetence']" width="30" height="30"></i>
+    </div>
+
   </div>
 
+  <div class="row d-flex justify-content-center ">
+
+    <app-item-competence  *ngFor="let comp of competence | paginate: { itemsPerPage: 6, currentPage: p }"  [competences]="comp" ></app-item-competence>
+  </div>
+  <pagination-controls class="justify-content-center d-flex" (pageChange)="p = $event"></pagination-controls>
 </div>
+
 

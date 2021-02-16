@@ -1,0 +1,57 @@
+
+
+
+
+
+
+
+<div class="col-sm-4 mb-4 mt-5">
+  <div class="card cadre1" style="width: 18rem;">
+    <div class="card-header">
+      {{competences.libelle}}
+      <div class="icon">
+        <i class="fas fa-pencil-alt" [routerLink]="['/head/editgroupecompetence']"></i>
+        <i class="fas fa-trash-alt ml-4" (click)="deleteCompetence()"></i>
+      </div>
+      <div class="col">
+
+      </div>
+
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="height list-group-item">{{competences.description}}</li>
+      <li class="list-group-item " *ngFor="let niveau of competences.niveau">{{niveau.libelle}}</li>
+    </ul>
+
+  </div>
+
+</div>
+
+
+
+
+<!--<div class="row justify-content-center">-->
+<!--  <div class="col-12 col-sm-10 ">-->
+<!--    <table class="table table-bordered">-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th scope="col">ID</th>-->
+<!--        <th scope="col">Libelle</th>-->
+<!--        <th scope="col">Descriptions</th>-->
+<!--        <th scope="col">Compétences</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr *ngFor="let grpc of groupeCompetence | paginate: { itemsPerPage: 2, currentPage: p }">-->
+<!--        <td>{{grpc.id}}</td>-->
+<!--        <td>{{grpc.libelle}}</td>-->
+<!--        <td>{{grpc.description}}</td>-->
+<!--        <td *ngFor="let compet of grpc.competence">{{compet.libelle}}</td>-->
+<!--      </tr>-->
+
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<pagination-controls class="justify-content-center d-flex" (pageChange)="p = $event"></pagination-controls>-->

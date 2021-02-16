@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CompetenceService} from "../competence.service";
 
 @Component({
   selector: 'app-liste-competence',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./liste-competence.component.css']
 })
 export class ListeCompetenceComponent implements OnInit {
-
-  constructor() { }
+  competence: any = [];
+  // @ts-ignore
+  p: string | number;
+  constructor(private Service: CompetenceService) { }
 
   ngOnInit(): void {
+    this.Service.getAllCompetence().subscribe(
+      data => {
+        console.log(data);
+        this.competence = data;
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
 }

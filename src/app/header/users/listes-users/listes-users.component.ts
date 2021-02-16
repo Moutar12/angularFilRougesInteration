@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from '../users.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-listes-users',
@@ -9,8 +10,12 @@ import {UsersService} from '../users.service';
 export class ListesUsersComponent implements OnInit {
   users: any = [];
   // @ts-ignore
+  searchText = '';
+  // @ts-ignore
   p: string | number;
-  constructor(private  UsersServices: UsersService) { }
+  // @ts-ignore
+  id: number;
+  constructor(private  UsersServices: UsersService,private router: Router) { }
 
   ngOnInit(): void {
    this.UsersServices.getAllUsers().subscribe(
@@ -21,7 +26,17 @@ export class ListesUsersComponent implements OnInit {
    );
   }
 
-  // tslint:disable-next-line:typedef
+  deleteUsers(id: number){
+    let conf = confirm('Etes vous sur de vouloir supprimé ?')
+    if(conf)
+      this.UsersServices.deleteUsers(id).subscribe(
+        ()=> {
+          console.log('groupeCompetence supprimé')
+        })
+    this.router.navigate(['/head/utili']).then(() => {
+      window.location.reload();
+    })
+  }
 
 
 }

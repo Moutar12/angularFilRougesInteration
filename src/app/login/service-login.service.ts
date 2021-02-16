@@ -26,14 +26,23 @@ export class ServiceLoginService {
       map((response: any) => {
         const decode = this.helper.decodeToken(response.token);
         // @ts-ignore
-        localStorage.setItem('token', response.token);
-        console.log(decode.roles);
+        localStorage.setItem('token', response.token );
+        localStorage.setItem('id', decode.id);
+        //console.log(decode);
         // tslint:disable-next-line:triple-equals
-        if (decode.roles[0] === 'ROLE_ADMIN'){
+        if (decode.roles[0] === 'ROLE_ADMIN' ){
+          this.router.navigate(['/head']);
+        }
+        else if (decode.roles[0] === 'ROLE_FORMATEUR'){
           this.router.navigate(['/head']);
         }
       })
     );
   }
+
+logout(){
+    localStorage.removeItem('token');
+}
+
 
 }

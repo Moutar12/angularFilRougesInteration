@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicesProfilService} from '../services-profil.service';
 import {element} from "protractor";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-listes-profil',
@@ -15,7 +16,7 @@ export class ListesProfilComponent implements OnInit {
   l: number;
   // @ts-ignore
   isLoader: boolean;
-  constructor(private services: ServicesProfilService) { }
+  constructor(private services: ServicesProfilService, private  router: Router) { }
 
   ngOnInit(): void {
    this.listAllProfils();
@@ -39,10 +40,13 @@ export class ListesProfilComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onDeleted(id: number){
-    // @ts-ignore
+    let conf = confirm('Etes vous sur de vouloir supprimer?')
+    if (conf)
     this.services.deleteProfil(id).subscribe(
     data => {
-      console.log(id);
+      this.router.navigate(['/head/profil']).then(() => {
+        window.location.reload();
+      });
     }
     );
   }
